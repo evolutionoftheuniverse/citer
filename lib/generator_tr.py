@@ -25,62 +25,62 @@ TYPE_TO_CITE = {
     # http://ctan.um.ac.ir/biblio/bibtex/base/btxdoc.pdf
     # A part of a book, which may be a chapter (or section or whatever) and/or
     # a range of pages.
-    'inbook': 'book',
+    'inbook': 'kitap',
     # A work that is printed and bound, but without a named publisher or
     # sponsoring institution.
     # Note: Yadkard does not currently support the `howpublished` option.
-    'booklet': 'book',
+    'booklet': 'kitap',
     # A part of a book having its own title.
-    'incollection': 'book',
+    'incollection': 'kitap',
     # Technical documentation.
     # Template:Cite manual is a redirect to Template:Cite_book on enwiki.
-    'manual': 'book',
+    'manual': 'kitap',
     # An article from a journal or magazine.
-    'article': 'journal',
+    'article': 'akademik dergi',
     # The same as INPROCEEDINGS, included for Scribe compatibility.
-    'conference': 'conference',
+    'conference': 'konferans',
     # An article in a conference proceedings.
-    'inproceedings': 'conference',
+    'inproceedings': 'konferans',
     # A Master's thesis.
-    'mastersthesis': 'thesis',
+    'mastersthesis': 'tez',
     # A PhD thesis.
-    'phdthesis': 'thesis',
+    'phdthesis': 'tez',
     # A report published by a school or other institution, usually numbered
     # within a series.
     # Todo: Add support for Template:Cite techreport
-    'techreport': 'techreport',
+    'techreport': 'bilimsel rapor',
     # Use this type when nothing else fits.
     'misc': '',
     # Types used by Yadkard.
     'web': 'web',
     # crossref types (https://api.crossref.org/v1/types)
-    'book-section': 'book',
-    'monograph': 'book',
-    'report': 'report',
-    'book-track': 'book',
-    'journal-article': 'journal',
-    'book-part': 'book',
+    'book-section': 'kitap',
+    'monograph': 'kitap',
+    'report': 'rapor',
+    'book-track': 'kitap',
+    'journal-article': 'akademik dergi',
+    'book-part': 'kitap',
     'other': '',
-    'book': 'book',
-    'journal-volume': 'journal',
-    'book-set': 'book',
+    'book': 'kitap',
+    'journal-volume': 'akademik dergi',
+    'book-set': 'kitap',
     'reference-entry': '',
-    'proceedings-article': 'conference',
-    'journal': 'journal',
+    'proceedings-article': 'konferans',
+    'journal': 'akademik dergi',
     # https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22368089&retmode=json&tool=my_tool&email=my_email@example.com
-    'Journal Article': 'journal',
+    'Journal Article': 'akademik dergi',
     'component': '',
-    'book-chapter': 'book',
-    'report-series': 'report',
-    'proceedings': 'conference',
+    'book-chapter': 'kitap',
+    'report-series': 'rapor',
+    'proceedings': 'konferans',
     'standard': '',
-    'reference-book': 'book',
+    'reference-book': 'kitap',
     'posted-content': '',
-    'journal-issue': 'journal',
-    'dissertation': 'thesis',
+    'journal-issue': 'konferans',
+    'dissertation': 'tez',
     'dataset': '',
-    'book-series': 'book',
-    'edited-book': 'book',
+    'book-series': 'kitap',
+    'edited-book': 'kitap',
     'standard-series': '',
 }.get
 
@@ -92,8 +92,9 @@ def sfn_cit_ref(d: defaultdict) -> tuple:
     if not cite_type:
         logger.warning('Unknown citation type: %s, d: %s', cite_type, d)
         cite_type = ''
-    cit = '* {{cite ' + cite_type
-    sfn = '{{sfn'
+    cit = '* {{'cite_type + ' kaynağı'
+    cit = cit if cite_type != '' else 'kaynak'
+    sfn = '{{kdş'
 
     authors = d['authors']
     publisher = d['publisher']
